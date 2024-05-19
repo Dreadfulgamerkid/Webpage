@@ -152,15 +152,3 @@
                 chatbotMessages.innerHTML += `<div class="message"><p><strong>Chatbot:</strong> ${data.choices[0].message.content.trim()}</p></div>`;
             } catch (error) {
                 chatbotMessages.innerHTML += `<div class="message"><p><strong>Error:</strong> ${error.message}</p></div>`;
-            }
-        }
-
-        document.getElementById('send-button').addEventListener('click', sendMessage);
-        document.getElementById('user-input').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                sendMessage();
-            }
-        });
-    </script>
-</body>
-</html>
