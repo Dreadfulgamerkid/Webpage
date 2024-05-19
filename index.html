@@ -108,6 +108,7 @@
     </div>
 
     <!-- Chat container -->
+    
     <div id="chat-container">
         <div id="user-messages"></div>
         <div id="chatbot-messages"></div>
@@ -118,7 +119,7 @@
     </div>
 
     <script>
-        const apiKey = 'your-api-key-here'; // Replace 'your-api-key-here' with your actual OpenAI API key
+        const apiKey = 'sk-acc-YLAxX6bypXh7XDmYyY5uT3BlbkFJJoFg0xDqsUrSumSGCOjS'; // Replace 'your-api-key-here' with your actual OpenAI API key
 
         async function sendMessage() {
             const userInput = document.getElementById('user-input').value;
@@ -152,3 +153,4 @@
                 chatbotMessages.innerHTML += `<div class="message"><p><strong>Chatbot:</strong> ${data.choices[0].message.content.trim()}</p></div>`;
             } catch (error) {
                 chatbotMessages.innerHTML += `<div class="message"><p><strong>Error:</strong> ${error.message}</p></div>`;
+                
