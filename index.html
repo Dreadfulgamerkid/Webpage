@@ -117,8 +117,10 @@
         </div>
     </div>
 
+    <!-- Include the GPT chatbot script -->
+    <script src="https://cdn.jsdelivr.net/npm/@openai/gpt-3.5-turbo/dist/gpt-3.5-turbo.min.js"></script>
     <script>
-        const apiKey = 'asst_pPM6JrxfwXAZUYPArBuVs99p'; // Replace 'your-api-key-here' with your actual OpenAI API key
+        const apiKey = 'sk-proj-W04xBVl23Iu1rHXZnpKxT3BlbkFJ7mZh8oni6unOluU1CcUI'; // Replace with provided API key
 
         async function sendMessage() {
             const userInput = document.getElementById('user-input').value;
@@ -131,24 +133,31 @@
             document.getElementById('user-input').value = '';
 
             try {
-                const response = await fetch('https://api.openai.com/v1/chat/completions', {
+                const response = await fetch('https://api.openai.com/v1/engines/gpt-3.5-turbo/completions', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${apiKey}`
                     },
                     body: JSON.stringify({
-                        model: "gpt-3.5-turbo",
-                        messages: [{ role: "user", content: userInput }],
+                        prompt: userInput,
                         max_tokens: 150
                     })
                 });
 
-                if (!response.ok) {
-                    throw new Error(`Error: ${response.status} ${response.statusText}`);
-                }
-
                 const data = await response.json();
-                chatbotMessages.innerHTML += `<div class="message"><p><strong>Chatbot:</strong> ${data.choices[0].message.content.trim()}</p></div>`;
+                chatbotMessages.innerHTML += `<div class="message"><p><strong>Chatbot:</strong> ${data.choices[0].text.trim()}</p></div>`;
             } catch (error) {
-                chatbotMessages.innerHTML += `<div class="message"><p><strong>Error:</strong> ${error.message}</p></div>`;
+                chatbotMessages.innerHTML += `<div class="message"><p><strong>Error:</strong> Failed to get a response from the chatbot.</p></div>`;
+            }
+        }
+
+        document.getElementById('send-button').addEventListener('click', sendMessage);
+        document.getElementById('user-input').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
